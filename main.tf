@@ -10,12 +10,12 @@ variable "target_repository" {
 
 variable "extra_repositories" {
   type    = list(string)
-  default = []
+  default = ["./packages"]
 }
 
 variable "extra_keyring" {
   type    = list(string)
-  default = []
+  default = ["./local-melange.rsa.pub"]
 }
 
 variable "extra_packages" {
@@ -456,6 +456,11 @@ module "kubernetes-dashboard" {
 module "kubernetes-ingress-defaultbackend" {
   source            = "./images/kubernetes-ingress-defaultbackend"
   target_repository = "${var.target_repository}/kubernetes-ingress-defaultbackend"
+}
+
+module "kube-fluentd-operator" {
+  source            = "./images/kube-fluentd-operator"
+  target_repository = "${var.target_repository}/kube-fluentd-operator"
 }
 
 module "kubewatch" {
